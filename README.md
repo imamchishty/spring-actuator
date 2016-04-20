@@ -15,6 +15,7 @@ Spring actuators, with focus on exception handling and request tracing.
     exception.interceptor.endpoint (defaults to exceptions)
     trace.interceptor.queue.size (defaults to 50)
     trace.interceptor.endpoint (defaults to requests)
+    exception.interceptor.stacktrace: false
        
 ## TraceRequestFilter
        

@@ -2,6 +2,7 @@ package com.shedhack.spring.actuator.endpoint;
 
 import com.shedhack.exception.core.ExceptionModel;
 import com.shedhack.spring.actuator.interceptor.ExceptionInterceptor;
+import com.shedhack.spring.actuator.interceptor.ExceptionWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.endpoint.Endpoint;
@@ -20,13 +21,17 @@ import java.util.List;
  *     This can be changed by setting:
  *
  *     exception.interceptor.endpoint
+ *
  * </pre>
  */
 @Component
-public class ExceptionsEndpoint implements Endpoint<List<ExceptionModel>> {
+public class ExceptionsEndpoint implements Endpoint<List<ExceptionWrapper>> {
 
     @Autowired
     private ExceptionInterceptor interceptor;
+
+    @Value("${exception.interceptor.stacktrace:true}")
+    private boolean showTrace;
 
     @Value("${exception.interceptor.endpoint:exceptions}")
     private String endpoint;
@@ -43,7 +48,7 @@ public class ExceptionsEndpoint implements Endpoint<List<ExceptionModel>> {
         return true;
     }
 
-    public List<ExceptionModel> invoke() {
+    public List<ExceptionWrapper> invoke() {
         return interceptor.getList();
     }
 }

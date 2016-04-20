@@ -20,6 +20,10 @@ import java.util.List;
  *     exception.interceptor.queue.size
  *
  *     The default is 50.
+ *
+ *     If you don't want to see the stack trace then set this to false, e.g.
+ *
+ *     exception.interceptor.stacktrace: false
  * </pre>
  */
 @Component
@@ -28,7 +32,10 @@ public class ExceptionInterceptor implements com.shedhack.exception.controller.s
     @Value("${exception.interceptor.queue.size:50}")
     private int queueSize = 50;
 
-    private EvictingQueue<ExceptionModel> queue;
+    @Value("${exception.interceptor.stacktrace:true}")
+    private boolean showTrace;
+
+    private EvictingQueue<ExceptionWrapper> queue;
 
     public ExceptionInterceptor() {
     }
@@ -40,16 +47,21 @@ public class ExceptionInterceptor implements com.shedhack.exception.controller.s
 
     public void handle(ExceptionModel exceptionModel, Exception e) {
         if(exceptionModel!=null) {
-            queue.add(exceptionModel);
+
+            if(showTrace) {
+                queue.add(new ExceptionWrapper(exceptionModel, e));
+            }
+            else {
+                queue.add(new ExceptionWrapper(exceptionModel, null));
+            }
         }
     }
 
+    public List<ExceptionWrapper> getList() {
 
-    public List<ExceptionModel> getList() {
+        List<ExceptionWrapper> models = new ArrayList<>(queueSize);
 
-        List<ExceptionModel> models = new ArrayList<>(queueSize);
-
-        Iterator<ExceptionModel> iterator = queue.iterator();
+        Iterator<ExceptionWrapper> iterator = queue.iterator();
         while(iterator.hasNext()){
             models.add(iterator.next());
         }
