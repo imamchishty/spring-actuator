@@ -4,7 +4,7 @@
 
     <groupId>com.shedhack.spring</groupId>
     <artifactId>spring-actuator</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.0.3</version>
 
     <description>Global Exception Handler for Spring.</description>
     <url>https://github.com/imamchishty/spring-actuator</url>
@@ -34,7 +34,7 @@
         <connection>scm:git:git@github.com:imamchishty/spring-actuator.git</connection>
         <developerConnection>scm:git:git@github.com:imamchishty/spring-actuator.git</developerConnection>
         <url>git@github.com:imamchishty/spring-actuator.git</url>
-        <tag>HEAD</tag>
+        <tag>spring-actuator-1.0.3</tag>
     </scm>
 
     <distributionManagement>
