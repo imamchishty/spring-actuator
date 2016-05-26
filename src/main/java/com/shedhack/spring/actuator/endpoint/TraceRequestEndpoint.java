@@ -1,6 +1,6 @@
 package com.shedhack.spring.actuator.endpoint;
 
-import com.shedhack.spring.actuator.interceptor.TraceRequestHandler;
+import com.shedhack.spring.actuator.interceptor.ActuatorTraceRequestInterceptor;
 import com.shedhack.trace.request.api.model.RequestModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,7 +26,7 @@ import java.util.List;
 public class TraceRequestEndpoint implements Endpoint<List<RequestModel>> {
 
     @Autowired
-    private TraceRequestHandler traceRequestHandler;
+    private ActuatorTraceRequestInterceptor traceRequestHandler;
 
     @Value("${trace.interceptor.endpoint:requests}")
     private String endpoint;

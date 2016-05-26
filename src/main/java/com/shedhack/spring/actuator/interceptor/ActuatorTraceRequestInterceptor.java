@@ -1,7 +1,7 @@
 package com.shedhack.spring.actuator.interceptor;
 
 import com.google.common.collect.EvictingQueue;
-import com.shedhack.trace.request.api.logging.LoggingHandler;
+import com.shedhack.trace.request.api.interceptor.TraceRequestInterceptor;
 import com.shedhack.trace.request.api.model.RequestModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -22,25 +22,19 @@ import java.util.List;
  * </pre>
  */
 @Component
-public class TraceRequestHandler implements LoggingHandler {
+public class ActuatorTraceRequestInterceptor implements TraceRequestInterceptor {
 
     @Value("${trace.interceptor.queue.size:50}")
     private int queueSize = 50;
 
     private EvictingQueue<RequestModel> queue;
 
-    public TraceRequestHandler() {
+    public ActuatorTraceRequestInterceptor() {
     }
 
     @PostConstruct
     private void createQueue() {
         queue = EvictingQueue.create(queueSize);
-    }
-
-    public void log(RequestModel model) {
-        if(model!=null) {
-            queue.add(model);
-        }
     }
 
     public List<RequestModel> getList() {
@@ -57,5 +51,13 @@ public class TraceRequestHandler implements LoggingHandler {
 
     public void clearQueue() {
         queue.clear();
+    }
+
+    public void onEntry(RequestModel requestModel) {
+        // only add records on exit
+    }
+
+    public void onExit(RequestModel requestModel) {
+        queue.add(requestModel);
     }
 }

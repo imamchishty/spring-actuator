@@ -4,7 +4,7 @@ import com.shedhack.spring.actuator.endpoint.ExceptionsEndpoint;
 import com.shedhack.spring.actuator.endpoint.TraceRequestEndpoint;
 import com.shedhack.spring.actuator.health.ExceptionHealthCheck;
 import com.shedhack.spring.actuator.interceptor.ExceptionInterceptor;
-import com.shedhack.spring.actuator.interceptor.TraceRequestHandler;
+import com.shedhack.spring.actuator.interceptor.ActuatorTraceRequestInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -25,8 +25,8 @@ public class ActuatorInterceptorConfiguration {
     }
 
     @Bean
-    public TraceRequestHandler traceRequestHandler() {
-        return new TraceRequestHandler();
+    public ActuatorTraceRequestInterceptor traceRequestHandler() {
+        return new ActuatorTraceRequestInterceptor();
     }
 
     @Bean
