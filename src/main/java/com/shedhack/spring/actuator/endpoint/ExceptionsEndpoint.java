@@ -1,6 +1,5 @@
 package com.shedhack.spring.actuator.endpoint;
 
-import com.shedhack.exception.core.ExceptionModel;
 import com.shedhack.spring.actuator.interceptor.ExceptionInterceptor;
 import com.shedhack.spring.actuator.interceptor.ExceptionWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
