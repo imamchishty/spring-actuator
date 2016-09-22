@@ -27,17 +27,17 @@ import java.util.List;
  * </pre>
  */
 @Component
-public class ExceptionInterceptor implements com.shedhack.exception.controller.spring.ExceptionInterceptor {
+public class ActuatorExceptionInterceptor implements com.shedhack.exception.controller.spring.ExceptionInterceptor {
 
     @Value("${exception.interceptor.queue.size:50}")
     private int queueSize = 50;
 
-    @Value("${exception.interceptor.stacktrace:true}")
+    @Value("${exception.interceptor.stacktrace:false}")
     private boolean showTrace;
 
     private EvictingQueue<ExceptionWrapper> queue;
 
-    public ExceptionInterceptor() {
+    public ActuatorExceptionInterceptor() {
     }
 
     @PostConstruct

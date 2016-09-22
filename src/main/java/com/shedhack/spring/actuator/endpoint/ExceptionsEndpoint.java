@@ -1,6 +1,6 @@
 package com.shedhack.spring.actuator.endpoint;
 
-import com.shedhack.spring.actuator.interceptor.ExceptionInterceptor;
+import com.shedhack.spring.actuator.interceptor.ActuatorExceptionInterceptor;
 import com.shedhack.spring.actuator.interceptor.ExceptionWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,7 +27,7 @@ import java.util.List;
 public class ExceptionsEndpoint implements Endpoint<List<ExceptionWrapper>> {
 
     @Autowired
-    private ExceptionInterceptor interceptor;
+    private ActuatorExceptionInterceptor interceptor;
 
     @Value("${exception.interceptor.stacktrace:true}")
     private boolean showTrace;

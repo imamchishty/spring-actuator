@@ -3,7 +3,7 @@ package com.shedhack.spring.actuator.config;
 import com.shedhack.spring.actuator.endpoint.ExceptionsEndpoint;
 import com.shedhack.spring.actuator.endpoint.TraceRequestEndpoint;
 import com.shedhack.spring.actuator.health.ExceptionHealthCheck;
-import com.shedhack.spring.actuator.interceptor.ExceptionInterceptor;
+import com.shedhack.spring.actuator.interceptor.ActuatorExceptionInterceptor;
 import com.shedhack.spring.actuator.interceptor.ActuatorTraceRequestInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,8 +20,8 @@ public class ActuatorInterceptorConfiguration {
     }
 
     @Bean
-    public ExceptionInterceptor exceptionInterceptor() {
-        return new ExceptionInterceptor();
+    public ActuatorExceptionInterceptor exceptionInterceptor() {
+        return new ActuatorExceptionInterceptor();
     }
 
     @Bean
