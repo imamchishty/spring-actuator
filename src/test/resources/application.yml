@@ -1,0 +1,17 @@
+spring.application.name: demo
+api.help.path: http://link
+
+logging.level.: ERROR
+logging.level.com.shedhack.exception.controller.spring: ERROR
+
+management:
+  contextPath: /admin
+  security:
+    enabled: false
+
+# Custom actuators
+exception.interceptor.queue.size: 50
+exception.interceptor.endpoint: exceptions
+exception.interceptor.stacktrace: false
+trace.interceptor.queue.size: 50
+trace.interceptor.endpoint: requests
